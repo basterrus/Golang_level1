@@ -27,8 +27,9 @@ import (
 //Вариант 2 ввод чисел через поток
 
 func main() {
-	inputNums := [5]int64{}
-	fmt.Println("Введите 5 чисел, после ввода каждого числа нажмите Enter: ")
+	const counts = 5
+	inputNums := [counts]int64{}
+	fmt.Printf("Введите %d чисел, после ввода каждого числа нажмите Enter: \n", counts)
 	scanner := bufio.NewScanner(os.Stdin)
 	for i := len(inputNums) - 1; i >= 0; i-- {
 		if scanner.Scan() {
