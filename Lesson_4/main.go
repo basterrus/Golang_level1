@@ -28,23 +28,24 @@ import (
 func main() {
 
 	const counts = 5
-	inputNums := make(map[int]int, counts)
+	var inputNums []int64
 	fmt.Printf("Введите %d чисел, после ввода каждого числа нажмите Enter: \n", counts)
 	scanner := bufio.NewScanner(os.Stdin)
 
 	for i := counts; i >= 0; i-- {
 		if scanner.Scan() {
 			num, _ := strconv.ParseInt(scanner.Text(), 10, 64)
-			inputNums[i] = int(num)
+			inputNums = append(inputNums, num)
 		}
 	}
 	fmt.Println("Вы ввели следующие числа: ")
 	fmt.Println(inputNums)
 	fmt.Println("Отсортированный массив: ")
-	fmt.Println(sortMap(inputNums))
+	fmt.Println(sort(inputNums))
 }
 
-func sortMap(inputNums map[int]int) map[int]int {
+//Функция сортировки
+func sort(inputNums []int64) []int64 {
 
 	for i := 1; i < len(inputNums); i++ {
 		x := inputNums[i]
