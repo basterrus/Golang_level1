@@ -1,39 +1,44 @@
 // Напишите приложение, рекурсивно вычисляющее заданное из стандартного ввода число Фибоначчи.
 // Оптимизируйте приложение за счёт сохранения предыдущих результатов в мапе
-
 package main
 
 import (
 	"fmt"
-	"os"
 )
 
-func fiboGen(n uint) uint {
+type fibfunc func(int64) int64
 
+//Рекурсивная функция вычисления
+func fibRecur(n int64) int64 {
 	if n < 2 {
-		return n
+		return 1
 	}
-	return fiboGen(n-1) + fiboGen(n-2)
+	return fibRecur(n-2) + fibRecur(n-1)
+}
+
+//Функция формирует слайс фибонначи
+func printFib(fib fibfunc, a, b int64) []int64 {
+	var fiboSlice []int64
+	for i := a; i < b; i++ {
+		fiboSlice = append(fiboSlice, fib(i))
+
+	}
+	return fiboSlice
 }
 
 func main() {
-	var number uint
-	fiboNums := make(map[uint]uint)
-
+	resultsMaps := make(map[int64][]int64)
 	for {
-		fmt.Println("Введите число для которого будет сделан рассчет числа фибоначчи (для выхода введите '9999'): ")
-		fmt.Scan(&number)
+		userInputs, _ := fmt.Println("Введите число: ")
+		fmt.Scan(&userInputs)
 
-		if number == 9999 {
-			os.Exit(1)
-
-		} else if _, ok := fiboNums[number]; ok {
-			fmt.Println("Для числа ", number, " число фибоначчи равно = ", fiboNums[number], "значение было рассчитано и сохранено ранее")
-
+		if key, ok := resultsMaps[int64(userInputs)]; ok {
+			fmt.Printf("Значение уже есть в базе: %d\n", key)
 		} else {
-			fiboNums[number] = fiboGen(number)
-			fmt.Println("Для числа ", number, " число фибоначчи равно = ", fiboGen(number), "значение записано в память")
-
+			slice := printFib(fibRecur, 0, int64(userInputs))
+			resultsMaps[int64(userInputs)] = slice
+			fmt.Println(resultsMaps)
 		}
+
 	}
 }
