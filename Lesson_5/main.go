@@ -10,11 +10,8 @@ import (
 
 func fiboGen(n uint) uint {
 
-	if n == 0 {
-		return 0
-	}
-	if n == 1 {
-		return 1
+	if n < 2 {
+		return n
 	}
 	return fiboGen(n-1) + fiboGen(n-2)
 }
