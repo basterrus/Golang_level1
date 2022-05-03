@@ -15,6 +15,7 @@ import (
 // используя библиотеку "godotenv"
 func init() {
 	err := godotenv.Load()
+
 	if err != nil {
 		fmt.Println("Конфигурационный файл не найден!")
 	}
@@ -25,7 +26,7 @@ func init() {
 func main() {
 	fmt.Println("Чтение данных из виртуального окружения: ")
 	configurations := config.ReadConfig()
-	fmt.Printf("DB_URL: %s\nDB_PORT: %s\nDB_USER: %s\nDB_PASSWORD: %s\n",
+	fmt.Printf("DB_URL: %s\nDB_PORT: %d\nDB_USER: %s\nDB_PASSWORD: %s\n",
 		configurations.DbUrl,
 		configurations.DbPort,
 		configurations.DbUser,
