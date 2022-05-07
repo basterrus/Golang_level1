@@ -25,19 +25,28 @@ import (
 //}
 
 //Вариант 2 ввод чисел через поток
-
 func main() {
+
 	const counts = 5
-	inputNums := [counts]int64{}
+	var inputNums []int64
 	fmt.Printf("Введите %d чисел, после ввода каждого числа нажмите Enter: \n", counts)
 	scanner := bufio.NewScanner(os.Stdin)
-	for i := len(inputNums) - 1; i >= 0; i-- {
+
+	for i := counts; i >= 0; i-- {
 		if scanner.Scan() {
 			num, _ := strconv.ParseInt(scanner.Text(), 10, 64)
-			inputNums[i] = num
+			inputNums = append(inputNums, num)
 		}
 	}
-	fmt.Printf("Исходный массив:%d\n", inputNums)
+	fmt.Println("Вы ввели следующие числа: ")
+	fmt.Println(inputNums)
+	fmt.Println("Отсортированный массив: ")
+	fmt.Println(sort(inputNums))
+}
+
+//Функция сортировки
+func sort(inputNums []int64) []int64 {
+
 	for i := 1; i < len(inputNums); i++ {
 		x := inputNums[i]
 		j := i
@@ -46,5 +55,5 @@ func main() {
 		}
 		inputNums[j] = x
 	}
-	fmt.Printf("Отсортированный массив :%d\n", inputNums)
+	return inputNums
 }
