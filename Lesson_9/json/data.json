@@ -1,0 +1,6 @@
+{
+  "DB_URL": "localhost_json",
+  "DB_PORT": 5432,
+  "DB_USER": "admin_json",
+  "DB_PASSWORD": "admin_json"
+}
